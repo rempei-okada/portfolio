@@ -1,6 +1,6 @@
 import { WorkListItem } from '@/api/works';
 import React from 'react';
-import RemoteImage from 'next-export-optimize-images/remote-image';
+import Image from 'next-export-optimize-images/picture';
 
 interface WorkCardProps {
     work: WorkListItem;
@@ -18,7 +18,7 @@ export const WorkCard = ({ work, index, onClick }: WorkCardProps) => {
         >
             {work.thumbnail && (
                 <div className="mb-4 overflow-hidden">
-                    <RemoteImage
+                    <Image
                         src={work.thumbnail.src}
                         alt={work.thumbnail.altText || work.thumbnail.title}
                         width={300}

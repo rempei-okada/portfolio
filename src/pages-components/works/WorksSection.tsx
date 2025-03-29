@@ -1,7 +1,5 @@
-'use client';
-
-import { useRef, useState } from "react";
-import { useMotionValueEvent, useScroll } from "motion/react";
+"use client";
+import { useState } from "react";
 import { SectionType1 } from "@/components/SectionType1";
 import { fetchWorksList, fetchWorkDetails, WorkListItem, WorkItem } from "@/api/works";
 
@@ -13,45 +11,14 @@ import WorkDetailDialog from "./WorkDetailDialog";
 
 // Main WorksSection component
 export const WorksSection = ({ initialWorks = [] }: { initialWorks?: WorkListItem[] }) => {
-    const element = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: element,
-        offset: ["start start", "end end"]
-    });
 
-    const [position, setPosition] = useState(0)
-    useMotionValueEvent(scrollYProgress, "change", v => {
-        setPosition(v)
-    })
 
-    // State for works data
-    const [works, setWorks] = useState<WorkListItem[]>(initialWorks);
-    const [loading, setLoading] = useState(initialWorks.length === 0);
-    const [error, setError] = useState<string | null>(null);
+
     
     // State for selected work and dialog
     const [selectedWork, setSelectedWork] = useState<WorkItem | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [detailLoading, setDetailLoading] = useState(false);
-
-    // Load works if none were provided as props
-    useState(() => {
-        if (initialWorks.length === 0) {
-            async function loadWorks() {
-                try {
-                    setLoading(true);
-                    const data = await fetchWorksList();
-                    setWorks(data);
-                } catch (err) {
-                    console.error('Error fetching works:', err);
-                    setError(err instanceof Error ? err.message : 'An unknown error occurred');
-                } finally {
-                    setLoading(false);
-                }
-            }
-            loadWorks();
-        }
-    });
 
     // Function to fetch work details when a work is selected
     const handleWorkClick = async (workId: string) => {
@@ -78,7 +45,7 @@ export const WorksSection = ({ initialWorks = [] }: { initialWorks?: WorkListIte
     return (
         <>
             <SectionType1 className="bg-paper2">
-                <div className="container mx-auto" ref={element}>
+                <div className="container mx-auto">
                     <section className="p-4 md:p-8 w-full">
                         <header className="mb-12 md:mb-16">
                             <div className="relative mb-8">
@@ -98,13 +65,7 @@ export const WorksSection = ({ initialWorks = [] }: { initialWorks?: WorkListIte
                         <div className="px-8 py-24 md:px-16 lg:px-32"
                             style={{ backgroundColor: 'rgba(179, 77, 77, 0.04)' }}>
                             <div className="max-w-5xl mx-auto">
-                                {loading ? (
-                                    <LoadingIndicator />
-                                ) : error ? (
-                                    <ErrorMessage message={`エラーが発生しました: ${error}`} />
-                                ) : (
-                                    <WorksGrid works={works} onSelectWork={handleWorkClick} />
-                                )}
+                            <WorksGrid works={initialWorks} onSelectWork={handleWorkClick} />
                             </div>
                         </div>
                     </section>
