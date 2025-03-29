@@ -1,0 +1,8 @@
+{
+    "github.copilot.chat.localeOverride": "ja",
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+      {
+        "text": "必ず日本語で記述してください"
+      }
+    ]
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { WorkItem } from '@/api/work';
+import { WorkItem } from '@/api/works';
 import LoadingIndicator from './LoadingIndicator';
 import ErrorMessage from './ErrorMessage';
 import WorkDetailContent from './WorkDetailContent';

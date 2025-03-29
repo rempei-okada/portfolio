@@ -1,5 +1,5 @@
+import { WorkListItem } from '@/api/works';
 import React from 'react';
-import { WorkListItem } from '@/api/work';
 
 interface WorkCardProps {
     work: WorkListItem;
