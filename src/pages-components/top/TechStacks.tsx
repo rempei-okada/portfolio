@@ -1,9 +1,6 @@
 import React, { type JSX } from 'react';
-import { ResponsiveRadar, RadarDataProps, RadarSvgProps } from '@nivo/radar';
 import { SectionType1 } from '@/components/SectionType1';
-import { Section1Title } from '@/components/Section1Title';
 import { BrushStroke } from '@/components/decorations';
-import { FaCloud, FaLaptopCode, FaServer } from 'react-icons/fa';
 import { sections } from '@/constants';
 
 // Tech stack data structure
