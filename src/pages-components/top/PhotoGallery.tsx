@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { SectionType1 } from '@/components/SectionType1';
 import { Section1Title } from '@/components/Section1Title';
-import Image from 'next-export-optimize-images/picture';
+import RemoteImage from 'next-export-optimize-images/remote-image';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { useWindowsSize } from '@/libs/useWindowSize';
 
@@ -31,44 +31,44 @@ const generateGridLayout = (images: PhotoImage[], screenSize: string) => {
     // Generate initial positions and dimensions based on aspect ratio
     const layouts = images.map((image, imgIndex) => {
         // Calculate aspect ratio with fallbacks
-        const aspectRatio = image.width && image.height 
-            ? image.width / image.height 
+        const aspectRatio = image.width && image.height
+            ? image.width / image.height
             : image.aspectRatio || 1.5;
-        
+
         // Classification based on aspect ratio
         const isWide = aspectRatio > 1.5;
         const isTall = aspectRatio < 0.7;
         const isSquarish = !isWide && !isTall;
-        
+
         let w = 1, h = 1, x = 0, y = 0;
-        
+
         // Size allocation based on screen size and aspect ratio
         switch (screenSize) {
             case 'lg':
 
-                    if(aspectRatio > 2.5) {
-                        w = 4;
-                        h = 1;
-                    }
-                    else if (aspectRatio > 1.5) {
-                        w = 3;
-                        h = 1;
-                    } 
-                    else if (aspectRatio > 1) {
-                        w = 2;
-                        h = 1;
-                    }
-                    else if (aspectRatio > 0.95 && aspectRatio < 1.05) {
-                        w = 1;
-                        h = 1;
-                    } 
-                    else  {
-                        w = 2;
-                        h = 2;
-                    }
+                if (aspectRatio > 2.5) {
+                    w = 4;
+                    h = 1;
+                }
+                else if (aspectRatio > 1.5) {
+                    w = 3;
+                    h = 1;
+                }
+                else if (aspectRatio > 1) {
+                    w = 2;
+                    h = 1;
+                }
+                else if (aspectRatio > 0.95 && aspectRatio < 1.05) {
+                    w = 1;
+                    h = 1;
+                }
+                else {
+                    w = 2;
+                    h = 2;
+                }
 
                 break;
-                
+
             case 'md':
                 if (isWide) {
                     w = Math.min(8, Math.max(4, Math.round(aspectRatio * 2)));
@@ -81,7 +81,7 @@ const generateGridLayout = (images: PhotoImage[], screenSize: string) => {
                     h = 3;
                 }
                 break;
-                
+
             case 'sm':
                 if (isWide) {
                     w = 6;
@@ -94,23 +94,23 @@ const generateGridLayout = (images: PhotoImage[], screenSize: string) => {
                     h = 3;
                 }
                 break;
-                
+
             case 'xs':
                 w = 6;
                 h = isWide ? 2 : (isTall ? 4 : 3);
                 break;
         }
-        
-        return { 
-            i: `${imgIndex}`, 
-            w, 
-            h, 
-            x, 
-            y, 
-            static: false 
+
+        return {
+            i: `${imgIndex}`,
+            w,
+            h,
+            x,
+            y,
+            static: false
         };
     });
-    
+
     return layouts;
 };
 
@@ -152,7 +152,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos = [] }) => {
 
                                     {/* Images with React Grid Layout */}
                                     {photo.images.length > 0 && (
-                                        <PhotoGalleryChild  photo={photo}/>
+                                        <PhotoGalleryChild photo={photo} />
                                     )}
                                 </div>
                             );
@@ -164,7 +164,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos = [] }) => {
     );
 };
 
-const PhotoGalleryChild = ({ photo}: {
+const PhotoGalleryChild = ({ photo }: {
     photo: PhotoListItem
 }) => {
     const [mounted, setMounted] = useState(false);
@@ -179,10 +179,10 @@ const PhotoGalleryChild = ({ photo}: {
     // Preprocess images to ensure they all have an aspect ratio
     const processedPhotos = useMemo(() => {
         return photos.map(img => {
-            const aspectRatio = img.width && img.height 
-                ? img.width / img.height 
+            const aspectRatio = img.width && img.height
+                ? img.width / img.height
                 : img.aspectRatio || 1.5;
-            
+
             return {
                 ...img,
                 aspectRatio
@@ -199,58 +199,74 @@ const PhotoGalleryChild = ({ photo}: {
     });
 
     return (
-        <ResponsiveGridLayout
-            className="layout"
-            layouts={layouts()}
-            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480 }}
-            cols={{ lg: 12, md: 8, sm: 6, xs: 6 }}
-            rowHeight={200}
-            compactType="horizontal" 
-            preventCollision={false}
-            autoSize
-            margin={[12, 12]}
-            containerPadding={[0, 0]}
-            useCSSTransforms={mounted}
-            isDraggable={false}
-            isResizable={false}
-            onLayoutChange={(layout) => {
-                // Optional: You can save the layout if needed
-            }}
-        >
-            {processedPhotos.map((image, imgIndex) => (
-                <div
-                    key={`${imgIndex}`}
-                    className="group relative overflow-hidden border-[0.1rem] border-sumi transition-transform duration-500 bg-white bg-opacity-50 hover:shadow-lg"
-                    style={{
-                        transform: `rotate(${imgIndex % 2 === 0 ? '-0.5deg' : '0.5deg'})`,
-                        transition: 'transform 0.5s ease-in-out'
-                    }}
-                >
-                    <Image
-                        src={image.src}
-                        alt={image.altText || photo.title}
-                        width={image.width || 800}
-                        height={image.height || 600}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        priority={imgIndex === 0}
-                        loading={imgIndex === 0 ? "eager" : "lazy"}
-                    />
-
-                    {/* Image title overlay */}
-                    {image.title && (
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <span className="text-white text-sm block">
-                                {image.title}
-                            </span>
-                            {image.description && (
-                                <span className="text-white/80 text-xs mt-1 block">
-                                    {image.description}
-                                </span>
-                            )}
-                        </div>
-                    )}
-                </div>
+        <>
+            {/* Placeholder for server-side rendering */}
+            {typeof window === "undefined" && processedPhotos.map((image, imgIndex) => (
+                <RemoteImage
+                    src={image.src}
+                    alt={image.altText || photo.title}
+                    width={image.width || 800}
+                    height={image.height || 600}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    priority={imgIndex === 0}
+                    loading={imgIndex === 0 ? "eager" : "lazy"}
+                />
             ))}
-        </ResponsiveGridLayout>
+
+            <ResponsiveGridLayout
+                className="layout"
+                layouts={layouts()}
+                breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480 }}
+                cols={{ lg: 12, md: 8, sm: 6, xs: 6 }}
+                rowHeight={200}
+                compactType="horizontal"
+                preventCollision={false}
+                measureBeforeMount
+                autoSize
+                margin={[12, 12]}
+                containerPadding={[0, 0]}
+                useCSSTransforms={mounted}
+                isDraggable={false}
+                isResizable={false}
+                onLayoutChange={(layout) => {
+                    // Optional: You can save the layout if needed
+                }}
+            >
+                {processedPhotos.map((image, imgIndex) => (
+                    <div
+                        key={`${imgIndex}`}
+                        className="group relative overflow-hidden border-[0.1rem] border-sumi transition-transform duration-500 bg-white bg-opacity-50 hover:shadow-lg"
+                        style={{
+                            transform: `rotate(${imgIndex % 2 === 0 ? '-0.5deg' : '0.5deg'})`,
+                            transition: 'transform 0.5s ease-in-out'
+                        }}
+                    >
+                        <RemoteImage
+                            src={image.src}
+                            alt={image.altText || photo.title}
+                            width={image.width || 800}
+                            height={image.height || 600}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            priority={imgIndex === 0}
+                            loading={imgIndex === 0 ? "eager" : "lazy"}
+                        />
+
+                        {/* Image title overlay */}
+                        {image.title && (
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <span className="text-white text-sm block">
+                                    {image.title}
+                                </span>
+                                {image.description && (
+                                    <span className="text-white/80 text-xs mt-1 block">
+                                        {image.description}
+                                    </span>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </ResponsiveGridLayout>
+        </>
     );
 }

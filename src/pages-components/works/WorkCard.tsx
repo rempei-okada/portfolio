@@ -1,5 +1,6 @@
 import { WorkListItem } from '@/api/works';
 import React from 'react';
+import RemoteImage from 'next-export-optimize-images/remote-image';
 
 interface WorkCardProps {
     work: WorkListItem;
@@ -9,20 +10,20 @@ interface WorkCardProps {
 
 export const WorkCard = ({ work, index, onClick }: WorkCardProps) => {
     return (
-        <article 
-            className={`relative p-6 bg-white bg-opacity-80 transform cursor-pointer border ${
-                index % 2 === 0 ? 'rotate-1' : '-rotate-1'
-            } ${
-                index % 3 === 1 ? 'md:mt-8' : ''
-            }`}
+        <article
+            className={`relative p-6 bg-white bg-opacity-80 transform cursor-pointer border ${index % 2 === 0 ? 'rotate-1' : '-rotate-1'
+                } ${index % 3 === 1 ? 'md:mt-8' : ''
+                }`}
             onClick={onClick}
         >
             {work.thumbnail && (
                 <div className="mb-4 overflow-hidden">
-                    <img 
-                        src={work.thumbnail.src} 
-                        alt={work.thumbnail.altText || work.title} 
-                        className="w-full h-48 object-cover hover:scale-105 transition-transform"
+                    <RemoteImage
+                        src={work.thumbnail.src}
+                        alt={work.thumbnail.altText || work.thumbnail.title}
+                        width={300}
+                        height={200}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                 </div>
             )}

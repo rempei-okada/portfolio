@@ -7,7 +7,7 @@ export const siteName = "Renpei Okada"
 
 export const TopProfile1 = () => <>
     広島県尾道市出身のエンジニア、{siteName}です。 <br />
-    モノ作りの精神をもとに多彩な技術を提供します.
+    幅広い経験のを経て、フリーランスとして活動しています。<br />
 </>
 
 export const TopProfile2 = () => <>
