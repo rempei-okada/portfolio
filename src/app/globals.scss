@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Amsterdam";
+    src: url("/Amsterdam_Four.ttf");
+}
+@font-face {
+    font-family: "TsunagiGothic";
+    src: url("/TsunagiGothic.woff");
+}
+
+
+
+body {
+    color: rgb(var(--foreground-rgb));
+    @apply text-size-p text-font1 bg-paper1;
+    font-family: "TsunagiGothic",sans-serif;
+}
+
+p{
+    @apply text-size-p;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+.link {
+    font-size: 0.8rem;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.active {
+    @apply pl-3;
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        width: 16px;
+        height: 1px;
+        background-color: black;
+        transform: rotate(-65deg);
+        transform-origin: left bottom;
+    }
+}
+
+::selection {
+    @apply bg-nezumi text-font1;
+  }

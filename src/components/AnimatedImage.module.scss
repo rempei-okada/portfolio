@@ -1,0 +1,56 @@
+.shutter {
+    position: absolute;
+    left: 0;
+    right: 0;
+    animation-delay: 0.5s;
+    background: rgb(247, 247, 247);
+    top: 0;
+    bottom: 100%;
+}
+.animate {
+    animation: shutter 2s cubic-bezier(0.51, 0.15, 0.25, 0.97) normal;
+}
+
+@keyframes shutter {
+    0% {
+        top: 100%;
+        bottom: 0%;
+    }
+    50% {
+        top: 0%;
+        bottom: 0%;
+    }
+    100% {
+        top: 0;
+        bottom: 100%;
+    }
+}
+
+.shutter2 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    animation-delay: 0.5s;
+    background: rgb(239, 239, 239);
+    top: 0%;
+    bottom: 0%;
+}
+
+.animate2 {
+    animation: shutter2 2s cubic-bezier(0.51, 0.15, 0.25, 0.97) forwards;
+}
+
+@keyframes shutter2 {
+    0% {
+        top: 0%;
+        bottom: 0%;
+    }
+    50% {
+        top: 0;
+        bottom: 100%;
+    }
+    100% {
+        top: 0;
+        bottom: 100%;
+    }
+}

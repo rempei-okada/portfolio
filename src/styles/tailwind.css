@@ -1,0 +1,95 @@
+/**
+ * Configure Tailwind v4 in this file using CSS variables and directives:
+ * https://tailwindcss.com/blog/tailwindcss-v4-alpha#css-first-configuration 
+ */
+
+@import 'tailwindcss';
+
+@import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
+
+@font-face {
+    font-family: "Amsterdam";
+    src: url("/Amsterdam_Four.ttf");
+}
+
+@theme {
+    --font-family-Amsterdam: "Amsterdam", sans-serif;
+    --font-family-Title: "Cantata One", sans-serif;
+
+    --font-size-size-p: min(2.8vw, 0.82rem);
+    --font-size-size-p--letter-spacing: 0.1rem;
+    --font-size-size-p--line-height: 1.7rem;
+    --font-size-size-p--font-weight: 500;
+
+    --font-size-size3: min(1vw, 0.72rem);
+    --font-size-size3--letter-spacing: 0.1rem;
+    --font-size-size3--line-height: 1.6rem;
+    --font-size-size3--font-weight: 500;
+
+    --font-size-size2: min(3.2vw, 1rem);
+    --font-size-size2--letter-spacing: 0.1rem;
+    --font-size-size2--line-height: 1.8rem;
+    --font-size-size2--font-weight: 500;
+
+    --font-size-size1: min(1.7vw, 1.25rem);
+    --font-size-size1--letter-spacing: 0.1rem;
+    --font-size-size1--line-height: 2rem;
+    --font-size-size1--font-weight: 400;
+
+    --font-size-title4: min(3.6vw, 1.1rem);
+    --font-size-title4--letter-spacing: 0.24rem;
+    --font-size-title4--line-height: 1.8rem;
+    --font-size-title4--font-weight: 400;
+
+    --font-size-title3: min(4vw, 1.3rem);
+    --font-size-title3--letter-spacing: 0.24rem;
+    --font-size-title3--line-height: 2rem;
+    --font-size-title3--font-weight: 400;
+
+    --font-size-title2: min(4.5vw, 1.6rem);
+    --font-size-title2--letter-spacing: 0.24rem;
+    --font-size-title2--line-height: 2.2rem;
+    --font-size-title2--font-weight: 400;
+
+    --font-size-title1: min(5.8vw, 2.4rem);
+    --font-size-title1--letter-spacing: 0.24rem;
+    --font-size-title1--line-height: 2.4rem;
+    --font-size-title1--font-weight: 400;
+
+
+    --width-mobile: 600px;
+    --width-tablet: 1240px;
+    --width-desktop: 1560px;
+
+    --color-color1: #3a2f2f;
+    --color-color2: #2f2823;
+
+    --color-color3: #EB8888;
+    --color-color4: #24989f;
+    --color-color5: #6cb9be;
+    --color-color6: #bfc9d3;
+    --color-color7: #fdf5f5;
+    --color-black: #101010;
+    --color-white: #ffffff;
+
+    --color-font1: #2f2823;
+    --color-font2: #2f2823;
+    --color-font3: #2f2823;
+
+    --color-grey1: #bba3a3;
+    --color-grey2: #f7f8fa;
+}
+
+
+p {
+    @apply text-size-p;
+}
+
+html,
+body {
+    background: white;
+    @apply text-size-p text-font1;
+    font-family: "Zen Old Mincho", sans-serif;
+}
+

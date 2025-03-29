@@ -1,0 +1,49 @@
+/* Import Japanese fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+/* Import React-Grid-Layout styles */
+@import 'react-grid-layout/css/styles.css';
+@import 'react-resizable/css/styles.css';
+
+/* Japanese style page specific global styles */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Additional Japanese-inspired styles */
+.japanese-brush-stroke {
+  position: relative;
+}
+
+.japanese-brush-stroke::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='10' viewBox='0 0 100 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,5 C25,2 75,8 100,5' stroke='%231A1A1A' fill='none' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 100px 10px;
+}
+
+/* Custom scrollbar for Japanese aesthetic */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F6F0E8;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #707C80;
+  border-radius: 0;
+  border: 3px solid #F6F0E8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #B34D4D;
+}

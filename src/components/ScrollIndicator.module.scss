@@ -1,0 +1,64 @@
+.container {
+    position: fixed;
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    right: 24px;
+    font-family: var(--font-jost);
+    color: black;
+    letter-spacing: 0.6em;
+    font-size: 0.5rem;
+}
+
+.bar {
+    display: block;
+    margin: 0.8rem auto;
+    width: 1px;
+    height: 60px;
+    background-color: #333;
+    position: relative;
+    z-index: 0;
+
+    &:after {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #080808;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: -24.155vw;
+        right: -24.155vw;
+        margin: 0 auto;
+        animation: 3.2s scrollanimeB ease infinite 3.32s;
+        transform: translate(0, -50%) scale(0);
+    }
+
+    @keyframes scrollanimeB {
+        0% {
+            top: 0;
+            opacity: 1;
+            transform: translate(0, -50%) scale(0);
+        }
+
+        5% {
+            top: 0;
+            opacity: 1;
+            transform: translate(0, -50%) scale(1);
+        }
+
+        75% {
+            top: 100%;
+            opacity: 1;
+            transform: translate(0, -50%) scale(1);
+        }
+
+        100% {
+            top: 100%;
+            opacity: 0;
+            transform: translate(0, -50%) scale(1);
+        }
+    }
+}
